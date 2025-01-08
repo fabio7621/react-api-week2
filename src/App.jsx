@@ -1,4 +1,16 @@
+import { useState } from "react";
 function App() {
+  const [account, setAccount] = useState({
+    username: "example@test.com",
+    password: "example",
+  });
+  const handlerChange = (e) => {
+    const { name, value } = e.target;
+    setAccount({
+      ...account,
+      [name]: value,
+    });
+  };
   return (
     <>
       <div className="d-flex flex-column justify-content-center align-items-center vh-100">
@@ -6,7 +18,10 @@ function App() {
         <form className="d-flex flex-column gap-3">
           <div className="form-floating mb-3">
             <input
+              name="username"
               type="email"
+              value={account.username}
+              onChange={handlerChange}
               className="form-control"
               id="username"
               placeholder="name@example.com"
@@ -15,6 +30,8 @@ function App() {
           </div>
           <div className="form-floating">
             <input
+              name="password"
+              value={account.password}
               type="password"
               className="form-control"
               id="password"
